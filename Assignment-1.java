@@ -74,6 +74,53 @@ class CaesarCipher
         }
         return result; 
     }
+
+    public static StringBuffer Decrypt(String cipher, int s) 
+    { String text = "";
+
+    //System.out.println(cipher);
+    try {
+        File myObj = new File("Keys.txt");
+        Scanner myReader = new Scanner(myObj);
+        while (myReader.hasNextLine()) {
+        text = myReader.nextLine();
+        }
+        myReader.close();
+     } catch (FileNotFoundException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+        }
+       StringBuffer result= new StringBuffer(); 
+  
+        for (int i=0; i<cipher.length(); i++) 
+        { 
+            for (int j = 0; j<text.length(); j++){
+
+            if (cipher.charAt(i) == text.charAt(j)) 
+            { 
+                int n = j;
+                //System.out.println(n);
+                n = n + 65;
+                n = n - s - 65;
+                System.out.println(n);
+
+                if (n < 0){
+                    n = 91 + n;
+                    char ch2 = (char) n;
+                    result.append(ch2);
+                }
+                else{
+                //char ch = (char) n;
+                //System.out.println(ch);
+                char ch1 = (char)(n % 26 + 65); 
+                result.append(ch1);
+                }
+                break;
+            }    
+        }  
+        }
+        return result; 
+    }
   
     // Driver code 
     public static void main(String[] args) 
@@ -92,6 +139,7 @@ class CaesarCipher
         int s = 4; 
         System.out.println("Text  : " + text); 
         System.out.println("Shift : " + s); 
-        System.out.println("Cipher: " + Keys(encrypt(text, s).toString())); 
+        System.out.println("Cipher: " + Keys(encrypt(text, s).toString()));
+        System.out.println("Decrypted: " + Decrypt(Keys(encrypt(text, s).toString()).toString(), s));
     } 
 }
