@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner; 
 
 class CaesarCipher 
-{   // Encrypts text using a shift od s 
+{    
     public static StringBuffer encrypt(String text, int s) 
     { 
         StringBuffer result= new StringBuffer(); 
@@ -33,7 +33,6 @@ class CaesarCipher
     public static StringBuffer Keys(String cipher) 
     { String text = "";
 
-    //System.out.println(cipher);
 
     try {
         File myObj = new File("Keys.txt");
@@ -54,11 +53,8 @@ class CaesarCipher
             if (Character.isUpperCase(cipher.charAt(i))) 
             { 
                 char ch = cipher.charAt(i);
-                //System.out.println(ch);
                 int n = ch;
-                //System.out.println(n);
                 n = n - 65;
-                //System.out.println(text.charAt(n));
                 result.append(text.charAt(n));
                 n=0;
             }    
@@ -78,7 +74,6 @@ class CaesarCipher
     public static StringBuffer Decrypt(String cipher, int s) 
     { String text = "";
 
-    //System.out.println(cipher);
     try {
         File myObj = new File("Keys.txt");
         Scanner myReader = new Scanner(myObj);
@@ -99,10 +94,8 @@ class CaesarCipher
             if (cipher.charAt(i) == text.charAt(j)) 
             { 
                 int n = j;
-                //System.out.println(n);
                 n = n + 65;
                 n = n - s - 65;
-                System.out.println(n);
 
                 if (n < 0){
                     n = 91 + n;
@@ -110,8 +103,6 @@ class CaesarCipher
                     result.append(ch2);
                 }
                 else{
-                //char ch = (char) n;
-                //System.out.println(ch);
                 char ch1 = (char)(n % 26 + 65); 
                 result.append(ch1);
                 }
